@@ -1,4 +1,4 @@
-CC=clang
+CC=gcc
 
 all:
 	$(CC) main.c sleep.c process.c sa_util.c -g -o sleep-app -lX11 -lXss -lm -pthread -Wall -Wextra -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function
@@ -10,6 +10,8 @@ clean:
 install:
 	sudo cp -a sleep-app sound sa-control /usr/local/bin
 	sudo cp -a sleep-app.service /etc/systemd/system
+	sudo /usr/bin/amixer -c 0 sset "Auto-Mute Mode" Disabled
+	sudo alsactl store
 
 uninstall:
 	sudo systemctl stop sleep-app
