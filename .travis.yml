@@ -1,1 +1,18 @@
-language: c
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "QJbXd+u/yYrhZXBKfCcgx2/EQxqAs4Su6h6qkufy9EbN70RqLgeveU+TuA3HuIHOEVRbc6JMCxAA9p5vVGu4OccRyfYH4BAdGL/SLSCvP338SjcpkAxoqFQ0B8BxnsTMRRiFfXC1YmoW+TxEGrx6c6KB+OhK09UIBaLf6CLcZ8UXsuLWDB5DTle3q3016W1FTO7ALowhEey8N2Dm+thAM8j4mOxAgYEwQtMRu5/SLn13MHqN9UKC3tWjeUPU5ERzTFyGytaIb2P4wu2VED/MsHFPWUbKBsRknyfi+RqEgUD56wJPQQeMK0kuD0EStPgoqJuuNEDRYeRzkpgjszF/1ErsgRYFBYDrZCfmryHBRTEHWlJU0v5I94eolyEz1YLlUDdrX4U41uYNgOX5HeZZ/oakKYbUx7OqIA7tZMrxLQcDrULbTbFn3XnIHnZ9F6RNoLoGsLDOz197IpvwEuBpTQVUCL9wMd/IGX46mO94+PLAAdRfIKkhyyuHNswRnnzZKH5HGe/dyiR7T2QNVCKrdVgshVD8D3NLIUv5Is5BN4jNckL0q7shU5IXHPvW9ofqB49fYKfK/r5ALivFtn63v57vBDJl6bbLlPjwdwiyY1K+18pdM+tsOnd7CSEGmbUA04rigUT8/xqF4N87sY6z6/YgFMw7ieAe2GG4zL3I9SE="
+
+before_install:
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+addons:
+  coverity_scan:
+    project:
+      name: "matthieugras/sleep-app"
+      description: "<Your project description here>"
+    notification_email: grasm@student.ethz.ch
+    build_command_prepend: ""
+    build_command: "make"
+    branch_pattern: coverity_scan
