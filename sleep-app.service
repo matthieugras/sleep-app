@@ -1,0 +1,8 @@
+[Unit]
+Description=Sleep main daemon
+
+[Service]
+ExecStart=/usr/local/bin/sleep-app
+
+[Install]
+WantedBy=multi-user.target
