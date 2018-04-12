@@ -1,4 +1,4 @@
-# sleep-app
+# sleep-app 1.0
 Advanced alarm clock daemon for Linux (BSD style license)
 
 # Dependencies
