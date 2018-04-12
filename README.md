@@ -11,7 +11,8 @@ Pulseaudio
 
 # Installation
 make  
-make install
+make install  
+Temporary hack for Xauthority: Change the putenv line of sa_main_get_x11_inactive_time in main.c
 
 # Usage
 sudo systemctl start sleep-app  
